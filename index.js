@@ -1,97 +1,144 @@
-import {sunglassesOptions, sunglasses} from './sunglasses.js';
+var sunglassesOptions = {
+    models: [
+        {
+            name: "aviator",
+            price: 300,
+            thumbImg: "thumb-aviator.png",
+            cssClass: "frame-aviator",
+        },
+        {      
+            name: "half-frame",
+            price: 200,
+            thumbImg: "thumb-half-frame.png",
+            cssClass: "frame-half",
+        },
+        {
+            name: "round",  
+            price: 250,
+            thumbImg: "thumb-round.png",
+            cssClass: "frame-round",
+        },
+        {  
+            name: "wayfarer",
+            price: 250,
+            thumbImg: "thumb-wayfarer.png",
+            cssClass: "frame-wayfarer",
+        }],
+    lenses: [
+        {
+            color: "sepia",
+            price: 20,
+            cssClass: "color-sepia",
+        },
+        {
+            color: "rainbow",
+            price: 50,
+            cssClass: "color-rainbow",
+        },
+        {
+            color: "iridescent",
+            price: 30,
+            cssClass: "color-iridescent",
+        }],
+    frames: [
+        {
+            color: "charcoal",
+            price: 0,
+            cssClass: "color-charcoal",
+        },
+        {
+            color: "tan",
+            price: 0,
+            cssClass: "color-tan",
+        },
+        {
+            color: "rose",
+            price: 0,
+            cssClass: "color-rose",
+        },
+    ],
+}
 
-// Updated from var to Const
-const productDetailsEl = document.getElementById("productDetails")
-const productImage = document.getElementById("productImage")
-const productFrames = document.getElementsByClassName("product-image_frame")[0]
-const productLenses = document.getElementsByClassName("product-image_lenses")[0]
+var sunglasses = {
+    model: {
+        name: "aviator",
+        price: 300,
+        thumbImg: "./images/thumb-aviator.png",
+        cssClass: "frame-aviator",
+    },
+    lenses: {
+        color: "sepia",
+        price: 20,
+        cssClass: "color-sepia",
+    },
+    frame: {
+        color: "charcoal",
+        price: 0,
+        cssClass: "color-charcoal",
+    }     
+}
 
-// Added Modal Code
-const openModalBtn = document.getElementById('openModalBtn');
-const modal = document.getElementById('modal');
-const closeModalBtn = document.getElementsByClassName('close')[0];
 
-// Open modal
-openModalBtn.addEventListener('click', () => {
-    modal.style.display = 'block';
-  });
-  
-  // Close modal
-  closeModalBtn.addEventListener('click', () => {
-    modal.style.display = 'none';
-  });
-  
-  // Close modal when clicking outside the modal content
-  window.addEventListener('click', (event) => {
-    if (event.target == modal) {
-      modal.style.display = 'none';
-    }
-  });
 
-// Updated from var to let
-let sunglassesNew = ''
+var productDetailsEl = document.getElementById("productDetails")
+var productImage = document.getElementById("productImage")
+var productFrames = document.getElementsByClassName("product-image_frame")[0]
+var productLenses = document.getElementsByClassName("product-image_lenses")[0]
 
-// updated to an arrow function
- const setSunglasses = (sunglassesNew = sunglasses) => {
+var sunglassesNew = ''
+
+function setSunglasses(sunglassesNew = sunglasses) {
     return sunglassesNew
 }
 
-// Arrow Function
-const render = (sunglassesNew) => {
-    // Destructered
-    const { model, lenses, frame } = sunglassesNew;
+function render(sunglassesNew) {
+    
+    var sunglassesNew = {
+        model: {
+            name: sunglassesNew.model.name,
+            price: sunglassesNew.model.price,
+            thumbImg: sunglassesNew.model.thumbImg,
+            cssClass: sunglassesNew.model.cssClass,
+        },
+        lenses: {
+            color: sunglassesNew.lenses.color,
+            price: sunglassesNew.lenses.price,
+            cssClass: sunglassesNew.lenses.cssClass,
+        },
+        frame: {
+            color: sunglassesNew.frame.color,
+            price: sunglassesNew.frame.price,
+            cssClass: sunglassesNew.frame.cssClass,
+        }     
+    }
+    var price = "$" + (sunglassesNew.model.price + sunglassesNew.lenses.price + sunglassesNew.frame.price)
+    
   
-    // updated from var to const
-    const updatedSunglasses = {
-      model: {
-        name: model.name,
-        price: model.price,
-        thumbImg: model.thumbImg,
-        cssClass: model.cssClass,
-      },
-      lenses: {
-        color: lenses.color,
-        price: lenses.price,
-        cssClass: lenses.cssClass,
-      },
-      frame: {
-        color: frame.color,
-        price: frame.price,
-        cssClass: frame.cssClass,
-      },
-    };
-  
-    // updated from var to const
-    const price = `$${model.price + lenses.price + frame.price}`;
-  
-    productDetailsEl.innerHTML = `
-      <h1>${model.name}</h1>
-      <p>Custom: ${lenses.color} lenses, ${frame.color} frames</p>
-      <p>${price}</p>
-    `;
-  
-    // udpated from var to const
-    const currClass = productImage.classList[1];
-    productImage.classList.replace(currClass, updatedSunglasses.model.cssClass);
-    //udpated from var to const
-    const currFramesClass = productFrames.classList[1];
-    productFrames.classList.replace(currFramesClass, updatedSunglasses.frame.cssClass);
-    //udpated from var to const
-    const currLensesClass = productLenses.classList[1];
-    productLenses.classList.replace(currLensesClass, updatedSunglasses.lenses.cssClass);
-  };
-  
+    productDetailsEl.innerHTML = 
+    "<h1>" + sunglassesNew.model.name + "</h1>" +
+    "<p>Custom: "  + sunglassesNew.lenses.color + " lenses, " + sunglassesNew.frame.color + " frames</p>" +
+    "<p>" + price + "</p>"
+    
+    var currClass = productImage.classList[1]
+    productImage.classList.replace(currClass, sunglassesNew.model.cssClass)
+    
+    var currFramesClass = productFrames.classList[1]
+    productFrames.classList.replace(currFramesClass, sunglassesNew.frame.cssClass)
+    
+    var currLensesClass = productLenses.classList[1]
+    productLenses.classList.replace(currLensesClass, sunglassesNew.lenses.cssClass)
+    
+}
 
 //Highlight current selection
-// Updated to an arrow function
-const addHighlight = (clickedItem) => {
+function addHighlight(clickedItem) {
     if (clickedItem.classList.contains("product-thumb")) {
         Array.from(document.getElementsByClassName("product-thumb"))
             .forEach(function(thumb) {
                thumb.classList.remove("selected") 
             }) 
     } else if (clickedItem.classList.contains("product-color-swatch")) {
-        const siblings = clickedItem.closest("ul").querySelectorAll("button")
+        var siblings = clickedItem.closest("ul").querySelectorAll("button")
         Array.from(siblings)
             .forEach(function(swatch) {
                swatch.classList.remove("selected") 
@@ -101,100 +148,124 @@ const addHighlight = (clickedItem) => {
 }
 
 
-document.body.addEventListener("click", (event) => {
-    const clickedItem = event.target;
-  
-    // If sunglassesNew is not defined, use original sunglasses object
-    const updatedSunglasses = sunglassesNew || sunglasses;
-  
-    // Update model
+document.body.addEventListener("click", function(event) {
+    var clickedItem = event.target
+    //if sunglassesNew defined take variable from updates 
+        //else use original sunglasses object
+    if (!sunglassesNew) {
+        sunglassesNew = sunglasses
+    }
+    
+    // update model
     if (clickedItem.classList.contains("product-thumb")) {
-      const currName = clickedItem.dataset.name;
-      const modelOptions = sunglassesOptions.models.find((item) => item.name === currName);
-  
-      const { name, price, thumbImg, cssClass } = modelOptions;
-  
-      sunglassesNew = {
-        model: {
-          name,
-          price,
-          thumbImg: updatedSunglasses.model.thumbImg,
-          cssClass,
-        },
-        lenses: {
-          color: updatedSunglasses.lenses.color,
-          price: updatedSunglasses.lenses.price,
-          cssClass: updatedSunglasses.lenses.cssClass,
-        },
-        frame: {
-          color: updatedSunglasses.frame.color,
-          price: updatedSunglasses.frame.price,
-          cssClass: updatedSunglasses.frame.cssClass,
-        },
-      };
-  
-      addHighlight(clickedItem);
-      setSunglasses(sunglassesNew);
-      render(sunglassesNew);
+
+        var currName = clickedItem.dataset.name
+
+        var modelOptions = sunglassesOptions.models
+        .filter(function(item) {
+            return item.name === currName
+        })[0]
+        
+        var name = modelOptions.name
+        var price = modelOptions.price
+        var thumbImg = modelOptions.thumbImg
+        var cssClass = modelOptions.cssClass
+        
+        sunglassesNew = {
+            model: {
+                name: name,
+                price: price,
+                thumbImg: sunglassesNew.model.thumbImg,
+                cssClass: cssClass,
+            },
+            lenses: {
+                color: sunglassesNew.lenses.color,
+                price: sunglassesNew.lenses.price,
+                cssClass: sunglassesNew.lenses.cssClass,
+            },
+            frame: {
+                color: sunglassesNew.frame.color,
+                price: sunglassesNew.frame.price,
+                cssClass: sunglassesNew.frame.cssClass,
+            }     
+        }
+       
+        addHighlight(clickedItem)
+        setSunglasses(sunglassesNew)
+        render(sunglassesNew)
     }
-  
-    // Update colors for frames / lenses
+    
+    // update colors for frames / lenses
     if (clickedItem.classList.contains("product-color-swatch")) {
-      const currColor = clickedItem.dataset.color;
-  
-      if (clickedItem.closest("div").classList[0] === "product-lenses") {
-        const colorOptions = sunglassesOptions.lenses.find((item) => item.color === currColor);
-  
-        const { color, price, cssClass } = colorOptions;
-  
-        sunglassesNew = {
-          model: {
-            name: updatedSunglasses.model.name,
-            price: updatedSunglasses.model.price,
-            thumbImg: updatedSunglasses.model.price,
-            cssClass: updatedSunglasses.model.cssClass,
-          },
-          lenses: {
-            color,
-            price,
-            cssClass,
-          },
-          frame: {
-            color: updatedSunglasses.frame.color,
-            price: updatedSunglasses.frame.price,
-            cssClass: updatedSunglasses.frame.cssClass,
-          },
-        };
-      } else {
-        const colorOptions = sunglassesOptions.frames.find((item) => item.color === currColor);
-  
-        const { color, price, cssClass } = colorOptions;
-  
-        sunglassesNew = {
-          model: {
-            name: updatedSunglasses.model.name,
-            price: updatedSunglasses.model.price,
-            thumbImg: updatedSunglasses.model.price,
-            cssClass: updatedSunglasses.model.cssClass,
-          },
-          lenses: {
-            color: updatedSunglasses.lenses.color,
-            price: updatedSunglasses.lenses.price,
-            cssClass: updatedSunglasses.lenses.cssClass,
-          },
-          frame: {
-            color,
-            price,
-            cssClass,
-          },
-        };
-      }
-  
-      addHighlight(clickedItem);
-      setSunglasses(sunglassesNew);
-      render(sunglassesNew);
+        var currColor = clickedItem.dataset.color
+        
+        // check nearest parent div
+            //lenses
+        if (clickedItem.closest("div").classList[0] === "product-lenses") {
+            var colorOptions = sunglassesOptions.lenses
+            .filter(function(item) {
+                return item.color === currColor
+            })[0]
+            
+            var color = colorOptions.color
+            var price = colorOptions.price
+            var cssClass = colorOptions.cssClass
+        
+            sunglassesNew = {
+                model: {
+                    name: sunglassesNew.model.name,
+                    price: sunglassesNew.model.price,
+                    thumbImg: sunglassesNew.model.price,
+                    cssClass: sunglassesNew.model.cssClass,
+                },
+                lenses: {
+                    color: color,
+                    price: price,
+                    cssClass: cssClass,
+                },
+                frame: {
+                    color: sunglassesNew.frame.color,
+                    price: sunglassesNew.frame.price,
+                    cssClass: sunglassesNew.frame.cssClass,
+                }     
+            }
+        } 
+        
+        //frames
+        else {
+            var colorOptions = sunglassesOptions.frames
+            .filter(function(item) {
+                return item.color === currColor
+            })[0]
+            
+            var color = colorOptions.color
+            var price = colorOptions.price
+            var cssClass = colorOptions.cssClass
+            
+            sunglassesNew = {
+                model: {
+                    name: sunglassesNew.model.name,
+                    price: sunglassesNew.model.price,
+                    thumbImg: sunglassesNew.model.price,
+                    cssClass: sunglassesNew.model.cssClass,
+                },
+                lenses: {
+                    color: sunglassesNew.lenses.color,
+                    price: sunglassesNew.lenses.price,
+                    cssClass: sunglassesNew.lenses.cssClass,
+                },
+                frame: {
+                    color: color,
+                    price: price,
+                    cssClass: cssClass,
+                }     
+            }
+        }
+
+        addHighlight(clickedItem)
+        setSunglasses(sunglassesNew)
+        render(sunglassesNew)
     }
-  });
-  
+})
 
 render(sunglasses)
