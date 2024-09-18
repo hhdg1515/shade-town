@@ -1,20 +1,19 @@
 import {sunglassesOptions, sunglasses} from './sunglasses.js';
+import {sunglassesOptions} from './sunglasses.js';
 
 const productDetailsEl = document.getElementById("productDetails")
 const productImage = document.getElementById("productImage")
 const productFrames = document.getElementsByClassName("product-image_frame")[0]
 const productLenses = document.getElementsByClassName("product-image_lenses")[0]
 
-let sunglassesNew = ''
+let sunglassesNew = '';
 
-const setSunglasses=(sunglassesNew = sunglasses)=> {
+function setSunglasses(sunglassesNew = sunglasses) {
     return sunglassesNew
 }
 
 function render(sunglassesNew) {
-    
-    const {model, lenses,frame}=sunglassesNew;
-    
+    const {model, lenses, frame} =sunglassesNew;
     const sunglassesNew = {
         model: {
             name: model.name,
